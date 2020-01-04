@@ -10,9 +10,17 @@ ARG groupid=1000
 ARG userid=1000
 ## end modify
 
+RUN apt-get update && \
+    apt-get install -y software-properties-common && \
+    apt-get update && \
+    add-apt-repository ppa:mscore-ubuntu/mscore-stable
+
 RUN apt-get update && apt-get install -y \
     graphviz \
-    libgraphviz-dev
+    libgraphviz-dev \
+    git \
+    xvfb \
+    musescore
 
 COPY ./requirements.txt /
 RUN python3 -m pip install --upgrade pip
